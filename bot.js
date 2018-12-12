@@ -107,6 +107,7 @@ webserver.get('/', function (req, res) {
 
 console.log("fetch db here")
 
+// Set up a listener for each channel
 Channel.find().then(channels=>{
   channels.forEach(channel => {
     require(__dirname + '/components/listener_setup.js')(controller, channel)
@@ -120,6 +121,7 @@ require(__dirname + '/components/user_registration.js')(controller);
 // Send an onboarding message when a new team joins
 require(__dirname + '/components/onboarding.js')(controller);
 
+// Imports the all the setups from the skills folder
 var normalizedPath = require("path").join(__dirname, "skills");
 require("fs").readdirSync(normalizedPath).forEach(function (file) {
   require("./skills/" + file)(controller);

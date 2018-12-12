@@ -1,6 +1,6 @@
 var ChannelInfo = require('../models/channelInfoModel');
 
-
+// This fetches tags from the slack channel purpose when the bot is added to a channel and saves them to the db
 module.exports = function (controller) {
 
     controller.on('bot_channel_join',
@@ -39,8 +39,6 @@ module.exports = function (controller) {
                         }
                     });
                 }
-
-
             })
         });
 }
