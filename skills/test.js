@@ -1,11 +1,12 @@
 var Message = require('../models/messageModel');
 var ChannelInfo = require('../models/channelInfoModel');
 
+// Listens to all messages and redirects them to the appropriet channel listener unless if it's a thread event
 module.exports = function (controller) {
     controller.on('ambient', function (bot, message) {
         if (!message.thread_ts) {
             controller.trigger(message.channel, [bot, message])
-        } else {
+        } else {  // This handles slack threads
 
             console.log('thread')
 

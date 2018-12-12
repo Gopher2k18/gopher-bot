@@ -1,13 +1,18 @@
 var Message = require('../models/messageModel');
 
+
+// For each slack channel recorded in the database sets up a listener for the channels keywords
 module.exports = function (controller, channel) {
 
+    // this map holds the message objects until they are allowed to be pused to the db
     let msgMap = new Map()
 
     controller.hears(channel.tags, channel.channelId,
         function (bot, message) {
             console.log(message)
                 let data = {}
+
+                // fetches username
                 bot.api.users.info({ user: message.user }, function (error, response) {
                     data.user = response.user.real_name
 
@@ -52,6 +57,8 @@ module.exports = function (controller, channel) {
                 })
         })
 
+
+        // Callback listener setup for the interactive message
     controller.on(`interactive_message_callback_${channel.channelId}`, function (bot, message) {
 
         console.log(message)

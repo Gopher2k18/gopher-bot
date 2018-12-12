@@ -1,6 +1,7 @@
 var Message = require('../models/messageModel');
 var ChannelInfo = require('../models/channelInfoModel');
 
+// This checks when a reaction is added if a message hits the reaction threashold and if yes it gets pushed to db
 module.exports = function (controller) {
     controller.on('reaction_added', function (bot, message) {
 
